@@ -5,30 +5,19 @@ import config from 'config'
 
 // 模板接口
 export interface UserDocument extends mongoose.Document {
-  name: string
-  account: string
-  password: string
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
+  fullname: string
+  email: string
+  avatar: string
+  address: string
 }
 
-// 模板校验规则
-const userSchema = new mongoose.Schema(
-  {
-    name: { type: String, required: true },
-    account: { type: String, required: true },
-    password: { type: String, required: true },
-  },
-  {
-    timestamps: true,
-  }
-)
+const userSchema = new mongoose.Schema({
+  fullname: String,
+  email: String,
+  avatar: String,
+  address: String,
+})
 
-// 唯一
-userSchema.index({ account: 1, deletedAt: 1 }, { unique: true })
-
-// 创建模板 执行之后会自动在mongodb中创建相应的模板
-const UserModel = mongoose.model<UserDocument>('User', userSchema)
+const UserModel = mongoose.model('users', userSchema)
 
 export default UserModel

@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import { AnyZodObject } from 'zod'
 import commonRes from '../utils/commonRes'
 
+// 返回参数校验
 const validate =
   (schema: AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {

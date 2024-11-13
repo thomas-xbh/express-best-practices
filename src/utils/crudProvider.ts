@@ -33,7 +33,10 @@ class BaseCrudProviderCls<document, Cdocument> {
     projection?: any,
     options?: QueryOptions
   ) {
-    const result = await this.DBModel.find(query, projection, options)
+    // const result = await this.DBModel.find(query, projection, options)
+    const result = await this.DBModel.find({})
+    console.log(this.DBModel,result,'result');
+    
     return result && result.map((d) => d.toJSON())
   }
 }
