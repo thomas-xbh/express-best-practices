@@ -1,15 +1,17 @@
 import { BaseCrudProvider } from '../utils/crudProvider'
 import UserModel, { UserDocument } from '../models/user.model'
 
-const CRUD = BaseCrudProvider<UserDocument, Omit<UserDocument, 'createdAt'>>(UserModel)
-console.log(CRUD,'CRUD');
-
-export const getAllUsers = async () => {
-    const res=await UserModel.find()
-    console.log(res,'res');
-    return res;
+const CRUD = BaseCrudProvider<UserDocument, Omit<UserDocument, 'createdAt'>>(
+  UserModel
+)
+export const findPage= async ()=>{
+    console.log(UserModel.estimatedDocumentCount({}),'123');
+    let count =await UserModel.estimatedDocumentCount({})
+    let res=await UserModel.find().skip(0).limit(10)
+    console.log(res,count,'res');
     
+    
+    return UserModel.estimatedDocumentCount()
 }
-
 
 export default CRUD

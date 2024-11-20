@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   avatar: String,
   address: String,
-})
+},{ autoCreate: true, autoIndex: false })
 
 const UserModel = mongoose.model('users', userSchema)
 

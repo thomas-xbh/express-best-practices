@@ -33,12 +33,18 @@ class BaseCrudProviderCls<document, Cdocument> {
     projection?: any,
     options?: QueryOptions
   ) {
-    // const result = await this.DBModel.find(query, projection, options)
-    const result = await this.DBModel.find({})
-    console.log(this.DBModel,result,'result');
-    
+    const result = await this.DBModel.find(query, projection, options)
+    // const result = await this.DBModel.find({})
+    // console.log(this.DBModel,result,'result');
+
     return result && result.map((d) => d.toJSON())
   }
+
+  async findPage(
+    query: FilterQuery<document>,
+    projection?: any,
+    options?: QueryOptions
+  ) {}
 }
 
 const BaseCrudProvider = function <document, Cdocument>(DBModel: Model<any>) {

@@ -2,9 +2,21 @@ import { Response } from 'express'
 import { Code, codeType, CodeMessage } from '../../constants/code'
 import logger from './logger'
 
+// todo 分页怎么处理
+
 interface ResOption {
   type?: codeType
-  status?: number 
+  status?: number
+  message?: unknown
+}
+
+interface sendResInterface {
+  code: number
+  resultObject: {
+    results: any
+    pagination?: Object
+  }
+  status: 'success' | 'error'
   message?: unknown
 }
 
@@ -21,9 +33,12 @@ function commonRes(res: Response, data: unknown, options?: ResOption) {
   }
 
   // 响应参数
-  const sendRes: { code: number; data: unknown; message?: unknown } = {
+  const sendRes: sendResInterface = {
     code: Code[type as codeType],
-    data,
+    resultObject: {
+      results: data
+    },
+    status: 'success',
   }
   // 响应描述
   message && (sendRes.message = message)
